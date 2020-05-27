@@ -4,28 +4,25 @@ from tkinter import *
 from tkinter import messagebox , Menu
 import sqlite3
 
-
-
+#Tkinter
 cyrpto = Tk()
-
 cyrpto.title("My Cyrpto Portfolio")
-
 cyrpto.iconbitmap("Fasticon1.ico")
 
+#database 
 c = sqlite3.connect("coins.db")
 co = c.cursor()
 co.execute("CREATE TABLE IF NOT EXISTS coin(id INTEGER PRIMARY KEY , symbol TEXT , price REAL , owned INTEGER)")
 c.commit()
 
-
+#reloading the window again
 def reset():
-
     for cell in cyrpto.winfo_children():
         cell.destroy()
     app_nav()
     app_header()
     my_portfolio()
-
+# navigation bar
 def app_nav():
 
     def clear_all():
@@ -33,10 +30,8 @@ def app_nav():
         c.commit()
         reset()
         messagebox.showinfo("Portfolio Notification","Portfolio Cleared ----- Add new coins")
-
     def close_app():
         cyrpto.destroy()
-
     def about():
         messagebox.showinfo("about us","This application is Developed by Yatharth Sharma    # Technologies used # 1) Python  2) sqlite3  3) Tkinter 4) Coinmarketcap API")    
 
@@ -47,7 +42,8 @@ def app_nav():
     file_item.add_command(label='Close Application', command=about)
     menu.add_cascade(label="File",menu=file_item)
     cyrpto.config(menu=menu)
-
+    
+# main fxn
 def my_portfolio():
 
     api_request=requests.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=USD&CMC_PRO_API_KEY=a5945a66-4e06-44f6-8017-1a1e7652e206")
@@ -176,7 +172,8 @@ def my_portfolio():
 
     Refresh = Button( cyrpto , text="Refresh" , bg="#142E54", fg='white', command= reset , font="Lato 13 ",borderwidth=4 ,relief="groove")
     Refresh.grid(row=coin_row +1, column=7, sticky=N+S+E+W )
-
+    
+#header off main window
 def app_header():
 
     Portfolio_ID = Label( cyrpto , text="Portfolio_ID" , bg="#142E54", fg='white', font="Lato 12 bold", padx="5", pady="5",borderwidth=2 ,relief="groove")
@@ -203,7 +200,6 @@ def app_header():
     totalpl = Label( cyrpto , text="Total P/L With Coin" , bg="#142E54", fg='white', font="Lato 12 bold", padx="5", pady="5",borderwidth=2 ,relief="groove")
     totalpl.grid(row=0, column=7, sticky=N+S+E+W )
 
-messagebox.showinfo("Welcome","This Application is Developed By Yatharth Sharma       >>> Press OK to continue")
 app_nav()
 app_header()
 my_portfolio()
