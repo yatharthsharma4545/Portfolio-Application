@@ -7,7 +7,7 @@ import sqlite3
 #Tkinter
 cyrpto = Tk()
 cyrpto.title("My Cyrpto Portfolio")
-cyrpto.iconbitmap("Fasticon1.ico")
+cyrpto.iconbitmap("icon.ico")
 
 #database 
 c = sqlite3.connect("coins.db")
