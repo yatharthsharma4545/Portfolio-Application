@@ -39,7 +39,7 @@ def app_nav():
     file_item=Menu(menu)
     file_item.add_command(label='Clear Portfolio', command= clear_all)
     file_item.add_command(label='Close Application', command=close_app)
-    file_item.add_command(label='Close Application', command=about)
+    file_item.add_command(label='About Us', command=about)
     menu.add_cascade(label="File",menu=file_item)
     cyrpto.config(menu=menu)
     
